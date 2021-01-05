@@ -25,30 +25,35 @@ public class Program {
 						"INNER JOIN tb_order_product ON tb_order.id = tb_order_product.order_id " + 
 						"INNER JOIN tb_product ON tb_product.id = tb_order_product.product_id");
 
-		Map<Long, Order> orders = new HashMap<>();
-		Map<Long, Product> products = new HashMap<>();
+		Map<Long, Order> map = new HashMap<>();
+		Map<Long, Product> prods = new HashMap<>();
 		while (rs.next()) {
-			Long orderId = rs.getLong("order_id");
-			if (orders.get(orderId) == null) {
+			
+			Long orderId = rs.getLong("order_Id");
+			if(map.get(orderId) == null) {
 				Order order = instantiateOrder(rs);
-				orders.put(orderId, order);
+				map.put(orderId, order);
+				// System.out.println(order);
 			}
+			
 			Long productId = rs.getLong("product_id");
-			if (products.get(productId) == null) {
-				Product product = instantiateProduct(rs);
-				products.put(productId, product);
+			if(prods.get(productId) == null) {
+				Product p = instantiateProduct(rs);
+				prods.put(productId, p);
+				// System.out.println(p);
 			}
-			orders.get(orderId).getProducts().add(products.get(productId));
-			for (Long ordersId : orders.keySet()) {
-				System.out.println(orders.get(ordersId));
-				for (Product p : orders.get(ordersId).getProducts()) {
-					System.out.println(p);
-				}
-				
-			}
-
+			map.get(orderId).getProducts().add(prods.get(productId));
+			
 		}
-
+		
+		for(long OrderId : map.keySet()) {			
+			System.out.println(map.get(OrderId));
+			for(Product p : map.get(OrderId).getProducts()) {
+				System.out.println(p);
+			}
+			System.out.println();
+		}
+		
 	}
 
 	public static Product instantiateProduct(ResultSet rs) throws SQLException {

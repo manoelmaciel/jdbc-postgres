@@ -1,0 +1,29 @@
+05/01/2021 - 14:00 
+
+  Código que estava dando problema ...
+
+  Map<Long, Order> orders = new HashMap<>();
+		Map<Long, Product> products = new HashMap<>();
+		while (rs.next()) {
+			Long orderId = rs.getLong("order_id");
+			if (orders.get(orderId) == null) {
+				Order order = instantiateOrder(rs);
+				orders.put(orderId, order);
+			}
+			Long productId = rs.getLong("product_id");
+			if (products.get(productId) == null) {
+				Product product = instantiateProduct(rs);
+				products.put(productId, product);
+			}
+			orders.get(orderId).getProducts().add(products.get(productId));
+			for (Long ordersId : orders.keySet()) {
+				System.out.println(orders.get(ordersId));
+				for (Product p : orders.get(ordersId).getProducts()) {
+					System.out.println(p);
+				}
+				
+			}
+
+		}
+
+  Ou ainda continua!
