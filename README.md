@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Revisão de OO e SQL
 
 ## Nesta aula vamos revisar
@@ -82,3 +83,7 @@ SELECT * FROM tb_order
 INNER JOIN tb_order_product ON tb_order.id = tb_order_product.order_id
 INNER JOIN tb_product ON tb_product.id = tb_order_product.product_id
 ```
+=======
+# jdbc-postgres
+Aula 3 - Preparação SDS_2 - Super revisão de OO e SQL
+>>>>>>> 69f5f85351ea8495b369082c7cfe458265a4a7d6
